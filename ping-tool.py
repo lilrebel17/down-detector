@@ -7,7 +7,6 @@ ip = "YOUR IP HERE"
 
 while True:
     response = os.system("ping " + ip)
-    response = 1
     # We check to see if response == 0. It should be if we get a single reponses from the IP
     if response == 0:
         logger.info("RESPONSE RECEIVED")
