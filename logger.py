@@ -10,7 +10,13 @@ logging.basicConfig(level=logging.INFO,format=FORMAT,datefmt='%m/%d/%Y %I:%M:%S 
 logging.basicConfig(level=logging.ERROR,format=FORMAT,datefmt='%m/%d/%Y %I:%M:%S %p',filename=LOG_PATH,encoding='utf-8')
 
 def info(message):
-    logging.info(message)
+    logging.info(f'[INFO]: {message.upper()}')
+
+def success(message):
+    logging.info(f'[PASS]: {message.upper()}')
 
 def error(message):
-    logging.error(message)
+    logging.error(f'[ERROR]: {message.upper()}')
+
+def fail(message):
+    logging.error(f'[FAIL]: {message.upper()}')

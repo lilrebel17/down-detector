@@ -1,3 +1,4 @@
 # Untracked Files
 /logs/*
 /__pycache__/
+/config_DEV.cfg

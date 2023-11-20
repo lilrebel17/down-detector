@@ -6,7 +6,7 @@ from email.mime.text import MIMEText
 
 #Setup & read the config file
 config = configparser.RawConfigParser()
-config_path = './config.cfg'
+config_path = './config_DEV.cfg'
 config.read(config_path)
 
 # Getting the Email creds for both the sender & receipent
@@ -39,9 +39,8 @@ def send_email(message):
         MESSAGE_STRING = MESSAGE.as_string()
         # Then we send the email out to the recepient email
         SMTP_SERVER.sendmail(SENDER_EMAIL,RECEPIENT_EMAIL,MESSAGE_STRING)
-        logger.info(f'[SUCCESS] Email was sent out to {RECEPIENT_EMAIL}')
+        logger.success(f'send_email: Email was sent out to - {RECEPIENT_EMAIL}')
         # Finally we close the connection to the server
         SMTP_SERVER.quit()
     except Exception as e:
-        logger.error(f'[FAIL] {e}')
-        print(f"Error: {e}")
+        logger.error(f'{e}')
