@@ -1,8 +1,13 @@
 import logging
+from logging.handlers import TimedRotatingFileHandler
 
+LOG_PATH = './logs/log.log'
 FORMAT = '[%(asctime)s] - %(levelname)s: %(message)s'
-logging.basicConfig(level=logging.INFO,format=FORMAT,datefmt='%m/%d/%Y %I:%M:%S %p',filename='./logs/log.log',encoding='utf-8')
-logging.basicConfig(level=logging.ERROR,format=FORMAT,datefmt='%m/%d/%Y %I:%M:%S %p',filename='./logs/log.log',encoding='utf-8')
+
+handler = TimedRotatingFileHandler(LOG_PATH,when='midnight',backupCount=30)
+
+logging.basicConfig(level=logging.INFO,format=FORMAT,datefmt='%m/%d/%Y %I:%M:%S %p',filename=LOG_PATH,encoding='utf-8')
+logging.basicConfig(level=logging.ERROR,format=FORMAT,datefmt='%m/%d/%Y %I:%M:%S %p',filename=LOG_PATH,encoding='utf-8')
 
 def info(message):
     logging.info(message)
