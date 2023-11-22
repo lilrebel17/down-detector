@@ -1,4 +1,5 @@
 # Untracked Files
+**/__pycache__/
 /logs/*
-/__pycache__/
 /config_DEV.cfg
+/.vscode
