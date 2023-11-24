@@ -1,24 +1,33 @@
 import os
+import time
+from modules.logger import logger
 
 # Pinger is used to ping remote sites
 
 class Pinger():
-    # Function to check for internet connectivity.
-    def check_internet_connectivity(self):
-        #We just ping google. If it responds, we are connected to the internet.
-        response = os.system('ping -c 4 google.com')
-        #response will = 0 if we get at least 1 packet back
-        if response == 0:
-            return True
+
+    #site can be a hostname or ip
+    #Hostname Example: google.com
+    #IP Example: 192.168.1.1
+    def ping_site(self,site):
+        successes = 0
+        for i in range(4):
+            response = os.system(f'ping -n 1 {site}')
+            if response == 0:
+                successes += 1
+            time.sleep(1)
+        if successes > 0  and successes < 4:
+            logger.warning(f'Server has Limited Connectivity - received {successes} packets from {site}')
+        elif successes == 4:
+            logger.success(f'Server has Full Connectivity - Received {successes} packets from {site}')
         else:
-            return False
-        
-    def ping_site(self,location_ip):
-        response = os.system(f"ping -c 4 {location_ip}")
-        if response == 0:
-            return True
-        else:
-            return False
+            logger.fail(f'Server has NO Connectivity - Receive {successes} packets from {site}')
+        return successes
+            
+
+
+
+
         
 
 pinger = Pinger()

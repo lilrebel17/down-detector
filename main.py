@@ -7,19 +7,18 @@ from modules.emailer import send_email
 
 if __name__ == "__main__":
     while True:
-        server_has_internet = pinger.check_internet_connectivity()
-        if server_has_internet == True:
-            logger.success('Server has internet - Received a response from google.com')
-            site_is_online = pinger.ping_site(configuration.location_ip)
-            if site_is_online == True:
-                logger.success(f'Site is online - Received a response from {configuration.location_name}')
-            else:
-                logger.fail(f'Site is offline - Did not receive a response from {configuration.location_name}')
-                log_message = str(logger.get_last_log())
-                send_email(log_message)
-            logger.info('Trying again in 30 seconds..')
-            time.sleep(30)
-        else:
-            logger.fail('Server is offline - Did not receive a packet from google.com')
-            logger.info('Trying again in 60 seconds..')
+        internet_connection_check = pinger.ping_site('google.com')
+        internet_connection_message = str(logger.get_last_log())
+
+        if internet_connection_check == 0:
+            logger.info('Trying again in 60 seconds')
             time.sleep(60)
+        else:
+            if internet_connection_check == 4:
+                site_connection_check = pinger.ping_site(configuration.location_ip)
+                site_connection_message = str(logger.get_last_log())
+
+                if site_connection_check != 4:
+                    send_email(f'{internet_connection_message}\n\n{site_connection_message}')
+            logger.info('Trying Again in 30 seconds')
+            time.sleep(30)

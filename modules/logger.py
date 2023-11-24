@@ -21,6 +21,9 @@ class Logger():
     def error(self,message):
         logging.warning(f'[ERROR]: {message.upper()}')
 
+    def warning(self,message):
+        logging.warning(f'[WARNING]: {message.upper()}')
+
     def fail(self,message):
         logging.error(f'[FAIL]: {message.upper()}')
 
