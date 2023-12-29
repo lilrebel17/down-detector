@@ -10,9 +10,13 @@ class Pinger():
     #Hostname Example: google.com
     #IP Example: 192.168.1.1
     def ping_site(self,site):
+        device_os = os.getenv("os")
         successes = 0
         for i in range(4):
-            response = os.system(f'ping -n 1 {site}')
+            if device_os == "Windows_NT":
+                response = os.system(f'ping -n 1 {site}')
+            else:
+                response = os.system(f'ping -c 1 {site}')
             if response == 0:
                 successes += 1
             time.sleep(1)
