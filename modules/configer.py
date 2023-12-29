@@ -28,7 +28,7 @@ class config_controller():
         return self.date
     
     def set_date(self):
-        self.date = datetime.date.today().strftime('%m/%d/%y')
+        self.date = datetime.date.today().strftime('%m-%d-%y')
         self.config.read(self.config_path)
         self.config.set('Enviroment','DATE',self.date)
         with open(self.config_path, "w+") as configfile:
@@ -59,3 +59,6 @@ class config_controller():
         return self.subject
     
 configuration = config_controller()
+#Call set_date on init. So the config has the current date.
+#That way when the log file rotates, it has the correct date.
+configuration.set_date()
