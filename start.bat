@@ -24,10 +24,13 @@ if exist config.cfg (
 ) else (
     echo "Unable to find config.cfg" 
     echo "Please either clone the depo again or navigate to https://github.com/lilrebel17/down-detector and copy the config.cfg"
+    timeout 5
     exit
     )
 
 echo "All checks ran successfully, please see ./logs/log.log for information. Do not close the window or the program will exit"
+
 timeout 5
+
 start python main.py
 pause
