@@ -50,7 +50,7 @@ bash start.sh
 bash stop.sh
 
 #For Windows:
-./stop.bat
+Exit the terminal window, or CTRL + C inside the terminal
 ```
 
 ## Contributing
